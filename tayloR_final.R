@@ -194,12 +194,12 @@ spotify_genius %>%
 
 # table: top 5 songs by valence
 spotify_genius %>% 
-  group_by(album_name) %>% 
-  summarise(mean(valence)) %>% 
-  arrange(desc(`mean(valence)`)) %>% 
+  select(track_name, album_name, valence) %>% 
+  top_n(5) %>% 
+  arrange(-valence) %>% 
   kable() %>% 
   kable_styling("striped", full_width = F, position = "left") %>% 
-  row_spec(row = 1:6, background = "#fffce4", color = "red")
+  row_spec(row = 1:5, background = "azure", color = "deeppink")
 
 # sonic score graph
 pirateplot(valence + danceability + energy ~ album_release_year, spotify_genius,
